@@ -8,10 +8,10 @@ class DeleteTest extends \PHPUnit_Framework_TestCase {
         echo PHP_EOL.'开始测试'.__CLASS__;
         $start = microtime(1);
 
-        //请求一：耗时3秒
+        //请求一：耗时3秒，form表单方式
         $req = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=3"))->request();
 
-        //请求二
+        //请求二：json body 方式提交
         $req2 = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=0"))->request();
 
         //模拟耗时任务3秒
@@ -25,9 +25,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase {
         //取回响应数据
         $this->assertEquals("DELETE:sleepTime=3", $req->getResponse()->body);
         $this->assertEquals("DELETE:sleepTime=0", $req2->getResponse()->body);
-        $this->assertNotEmpty($req->getResponse()->headers);
-        $this->assertEquals("text/html", $req->getResponse()->getHeader('Content-Type'));
-        $this->assertEquals(200, $req->getResponse()->getStatusCode());
 
         //大于等于6s表示是同步
         $costTime = microtime(1) - $start;

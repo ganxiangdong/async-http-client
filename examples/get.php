@@ -29,9 +29,6 @@ class GetTest extends \PHPUnit_Framework_TestCase {
         //取回响应数据
         $this->assertEquals("GET:sleepTime=3;header.Test=1", $req->getResponse()->body);
         $this->assertEquals("GET:sleepTime=1", $req2->getResponse()->body);
-        $this->assertNotEmpty($req->getResponse()->headers);
-        $this->assertEquals("text/html", $req->getResponse()->getHeader('Content-Type'));
-        $this->assertEquals(200, $req->getResponse()->getStatusCode());
 
         //大于等于6s表示是同步
         $costTime = microtime(1) - $start;
@@ -54,21 +51,6 @@ class GetTest extends \PHPUnit_Framework_TestCase {
         $this->assertEmpty($response->body);
         $this->assertEmpty($response->headers);
         $this->assertLessThan(2, $costTime);
-    }
-
-    /**
-     * 测试超时后再接收
-     */
-    public function testTimeoutReceive()
-    {
-        $req = (new \AsyncHttp\Get("http://192.168.88.2/server.php?sleepTime=0"))->setTimeout(2)->request();
-
-        sleep(3);
-
-        $response = $req->getResponse();
-
-        $this->assertNotEmpty($response->body);
-        $this->assertNotEmpty($response->headers);
     }
 }
 

@@ -28,9 +28,6 @@ class PutTest extends \PHPUnit_Framework_TestCase {
         //取回响应数据
         $this->assertEquals("PUT:sleepTime=3", $req->getResponse()->body);
         $this->assertEquals("PUT:sleepTime=1", $req2->getResponse()->body);
-        $this->assertNotEmpty($req->getResponse()->headers);
-        $this->assertEquals("text/html", $req->getResponse()->getHeader('Content-Type'));
-        $this->assertEquals(200, $req->getResponse()->getStatusCode());
 
         //大于等于6s表示是同步
         $costTime = microtime(1) - $start;

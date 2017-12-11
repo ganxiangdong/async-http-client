@@ -23,7 +23,7 @@ abstract class Http
      * 请求的头
      * @var array
      */
-    private $requestHeaders;
+    public $requestHeaders;
 
     /**
      * 请求方式
@@ -59,6 +59,9 @@ abstract class Http
 
     public function request()
     {
+        if (!empty($this->response)) { //已经请求过了
+            return $this;
+        }
         $this->coroutine = $this->writeAndRead();
         $this->coroutine->current();
         return $this;
@@ -93,9 +96,7 @@ abstract class Http
         curl_setopt($ch, CURLOPT_MAXREDIRS, 7);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->requestMethod);
-        if (strcasecmp($this->requestMethod, 'POST') == 0) { //设置请求方式
-            curl_setopt($ch, CURLOPT_POST, 1);
-        }
+
         //设置请求body
 //        这种方式有bug：在POST时，实际并没有write到服务器，所以采用下面的方式解决了此bug
 //        if (!empty($this->requestBody)) {
@@ -112,14 +113,19 @@ abstract class Http
                     $requestBody .= "{$k}={$v}&";
                 }
                 $requestBody = rtrim($requestBody, '&');
+            } elseif (!isset($this->requestHeaders['Content-Type'])) {
+                $this->requestHeaders['Content-Type'] = 'application/json';//默认为json
             }
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
             $this->requestHeaders['Content-Length'] = strlen($requestBody);
         }
 
-
         if (!empty($this->requestHeaders)) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->requestHeaders);
+            $headers = [];
+            foreach ($this->requestHeaders as $k => $v) {
+                $headers[] = "{$k}:{$v}";
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
 
         curl_multi_add_handle($mh, $ch);
@@ -156,10 +162,23 @@ abstract class Http
      * 添加header头
      * @param $key
      * @param $val
+     * @return $this
      */
     public function addHeader($key, $val)
     {
         $this->requestHeaders[$key] = $val;
+        return $this;
+    }
+
+    /**
+     * 设置超时
+     * @param $timeout
+     * @return $this
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+        return $this;
     }
 
     /**
@@ -180,7 +199,7 @@ abstract class Http
     private function parseResponseRaw($raw, $resInfo)
     {
         if (empty($raw) || empty($resInfo)) {
-            return ['body' => null, 'headers' => []]; //TODO
+            return ['body' => null, 'headers' => []];
         }
         $headerRaw= substr($raw, 0, $resInfo['header_size']);
         $body = substr($raw, $resInfo['header_size']);

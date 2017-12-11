@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/../vendor/autoload.php';
 
-class PutTest extends \PHPUnit_Framework_TestCase {
+class PostTest extends \PHPUnit_Framework_TestCase {
 
     public function testOne()
     {
@@ -10,12 +10,12 @@ class PutTest extends \PHPUnit_Framework_TestCase {
         $start = microtime(1);
 
         //请求一：form表单方式，耗时3秒
-        $postData = json_encode(['sleepTime' => 3]);
-        $req = (new \AsyncHttp\Put("http://192.168.88.2/server.php", $postData))->request();
+        $postData = ['sleepTime' => 3];
+        $req = (new \AsyncHttp\Post("http://192.168.88.2/server.php", $postData))->request();
 
         //请求二：json body 方式提交，耗时1秒
         $postData = json_encode(['sleepTime' => 1]);
-        $req2 = (new \AsyncHttp\Put("http://192.168.88.2/server.php", $postData))->request();
+        $req2 = (new \AsyncHttp\Post("http://192.168.88.2/server.php", $postData))->request();
 
         //模拟耗时任务3秒
         $times = 3;
@@ -26,11 +26,8 @@ class PutTest extends \PHPUnit_Framework_TestCase {
         }
 
         //取回响应数据
-        $this->assertEquals("PUT:sleepTime=3", $req->getResponse()->body);
-        $this->assertEquals("PUT:sleepTime=1", $req2->getResponse()->body);
-        $this->assertNotEmpty($req->getResponse()->headers);
-        $this->assertEquals("text/html", $req->getResponse()->getHeader('Content-Type'));
-        $this->assertEquals(200, $req->getResponse()->getStatusCode());
+        $this->assertEquals("POST:sleepTime=3", $req->getResponse()->body);
+        $this->assertEquals("POST:sleepTime=1", $req2->getResponse()->body);
 
         //大于等于6s表示是同步
         $costTime = microtime(1) - $start;
