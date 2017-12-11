@@ -86,7 +86,7 @@ composer require xd/async-http
 
 ----
 
-1. custom header
+1. Custom header
 
    ```php
    //example 1
