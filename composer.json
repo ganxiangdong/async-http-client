@@ -1,7 +1,7 @@
 {
-  "name": "xd/asyncHttp",
-  "keywords": ["async","asynchronism", "http", "asyncHttp"],
-  "homepage": "https://github.com/ganxiangdong/async-http",
+  "name": "xd/async-http",
+  "keywords": ["async","asynchronism", "http client", "asyncHttp", "asyncHttpClient"],
+  "homepage": "https://github.com/ganxiangdong/async-http-client",
   "license": "MIT",
   "authors": [
     {
