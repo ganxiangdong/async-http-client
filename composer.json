@@ -1,0 +1,33 @@
+{
+  "name": "xd/asyncHttp",
+  "keywords": ["async","asynchronism", "http", "asyncHttp"],
+  "homepage": "https://github.com/ganxiangdong/async-http",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "xiangdonggan",
+      "email": "phpwww@126.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "ext-curl": "*"
+  },
+
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    },
+    {
+      "packagist": false
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "AsyncHttp\\": "src/"
+    }
+  }
+}
