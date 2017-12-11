@@ -1,11 +1,13 @@
 <?php
-namespace AsyncHttp;
+namespace Xd\AsyncHttp;
+
+use Xd\AsyncHttp\Libs\Http;
 
 /**
  * Class Delete
  * @package AsyncHttp
  */
-class Delete extends Libs\Http
+class Delete extends Http
 {
     protected $requestMethod = 'DELETE';
 

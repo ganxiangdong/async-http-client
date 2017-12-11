@@ -1,6 +1,8 @@
 <?php
 include __DIR__.'/../vendor/autoload.php';
 
+use Xd\AsyncHttp\AsyncHttp;
+
 class PutTest extends \PHPUnit_Framework_TestCase {
 
     public function testOne()
@@ -10,12 +12,12 @@ class PutTest extends \PHPUnit_Framework_TestCase {
         $start = microtime(1);
 
         //请求一：form表单方式，耗时3秒
-        $postData = json_encode(['sleepTime' => 3]);
-        $req = (new \AsyncHttp\Put("http://192.168.88.2/server.php", $postData))->request();
+        $putData = json_encode(['sleepTime' => 3]);
+        $req = AsyncHttp::put("http://192.168.88.2/server.php", $putData)->request();
 
         //请求二：json body 方式提交，耗时1秒
-        $postData = json_encode(['sleepTime' => 1]);
-        $req2 = (new \AsyncHttp\Put("http://192.168.88.2/server.php", $postData))->request();
+        $putData = json_encode(['sleepTime' => 1]);
+        $req2 = AsyncHttp::put("http://192.168.88.2/server.php", $putData)->request();
 
         //模拟耗时任务3秒
         $times = 3;

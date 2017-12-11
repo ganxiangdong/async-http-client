@@ -14,7 +14,7 @@ composer require xd/async-http
 
    ```php
    //requsting 
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"))->request();
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3")->request();
 
    //do somthing...
 
@@ -35,12 +35,12 @@ composer require xd/async-http
    ```php
    //requesting by x-www-form-urlencode
    $postData = ['sleepTime' => 3];
-   $req = (new \AsyncHttp\Post("http://192.168.88.2", $postData))->request();
+   $req = AsyncHttp::post("http://192.168.88.2", $postData)->request();
    //requesting by raw JSON
    $postData = json_encode(['sleepTime' => 1]);
-   $req2 = (new \AsyncHttp\Post("http://192.168.88.2", $postData))->request();
+   $req2 = AsyncHttp::post("http://192.168.88.2", $postData)->request();
    //requesting by raw XML
-   $req2 = (new \AsyncHttp\Post("http://192.168.88.2", $xmlDataStr))->addHeader("Content-Type":"application/xml")->request();
+   $req2 = AsyncHttp::post("http://192.168.88.2", $xmlDataStr)->addHeader("Content-Type":"application/xml")->request();
 
    //do somthing...
 
@@ -55,10 +55,10 @@ composer require xd/async-http
    ```php
    //requesting by x-www-form-urlencode
    $putData = json_encode(['sleepTime' => 3]);
-   $req = (new \AsyncHttp\Put("http://192.168.88.2/index.php", $putData))->request();
+   $req = AsyncHttp::put("http://192.168.88.2/index.php", $putData)->request();
    //requesting by raw JSON
    $putData = json_encode(['sleepTime' => 1]);
-   $req2 = (new \AsyncHttp\Put("http://192.168.88.2/index.php", $postData))->request();
+   $req2 = AsyncHttp::put("http://192.168.88.2/index.php", $postData)->request();
 
    //do somthing...
 
@@ -71,9 +71,9 @@ composer require xd/async-http
 
    ```php
    //requesting
-   $req = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=3"))->request();
+   $req = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=3")->request();
    //requesting
-   $req2 = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=0"))->request();
+   $req2 = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=0")->request();
 
    //do somthing...
 
@@ -90,15 +90,15 @@ composer require xd/async-http
 
    ```php
    //example 1
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"));
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3");
    $req->addHeader("Test", 1);
    $req->request();
 
    //example 2
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"))->addHeader("Test", 1)->addHeader("Test-X", "2")->request();
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3")->addHeader("Test", 1)->addHeader("Test-X", "2")->request();
 
    //example 3
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"));
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3");
    $req->requestHeaders = ["Test" => "1","Test-X" => "2"];
    $req->request();
    ```
@@ -108,15 +108,15 @@ composer require xd/async-http
 
    ```php
    //example 1
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"));
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3");
    $req->setTimeout(8);
    $req->request();
 
    //example 2
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"))->setTimeout(8)->request();
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3")->setTimeout(8)->request();
 
    //example 3
-   $req = (new \AsyncHttp\Get("http://192.168.88.2?sleepTime=3"));
+   $req = AsyncHttp::get("http://192.168.88.2?sleepTime=3");
    $req->setTimeout = 8;
    $req->request();
    ```

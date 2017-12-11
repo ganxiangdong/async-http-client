@@ -1,11 +1,13 @@
 <?php
-namespace AsyncHttp;
+namespace Xd\AsyncHttp;
+
+use Xd\AsyncHttp\Libs\Http;
 
 /**
  * Class Get
  * @package AsyncHttp
  */
-class Get extends Libs\Http
+class Get extends Http
 {
     protected $requestMethod = 'GET';
 

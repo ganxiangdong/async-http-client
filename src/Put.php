@@ -1,11 +1,13 @@
 <?php
-namespace AsyncHttp;
+namespace Xd\AsyncHttp;
+
+use Xd\AsyncHttp\Libs\Http;
 
 /**
  * Class Put
  * @package AsyncHttp
  */
-class Put extends Libs\Http
+class Put extends Http
 {
     protected $requestMethod = 'PUT';
 

@@ -1,6 +1,8 @@
 <?php
 include __DIR__.'/../vendor/autoload.php';
 
+use Xd\AsyncHttp\AsyncHttp;
+
 class DeleteTest extends \PHPUnit_Framework_TestCase {
 
     public function testOne()
@@ -9,10 +11,10 @@ class DeleteTest extends \PHPUnit_Framework_TestCase {
         $start = microtime(1);
 
         //请求一：耗时3秒
-        $req = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=3"))->request();
+        $req = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=3")->request();
 
         //请求二
-        $req2 = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=0"))->request();
+        $req2 = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=0")->request();
 
         //模拟耗时任务3秒
         $times = 3;

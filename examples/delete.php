@@ -1,11 +1,13 @@
 <?php
+use Xd\AsyncHttp\AsyncHttp;
+
 include __DIR__.'/../vendor/autoload.php';
 
 //请求一
-$req = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=3"))->request();
+$req = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=3")->request();
 
 //请求二
-$req2 = (new \AsyncHttp\Delete("http://192.168.88.2/index.php?sleepTime=0"))->request();
+$req2 = AsyncHttp::delete("http://192.168.88.2/index.php?sleepTime=0")->request();
 
 //做一些其它事：模拟耗时任务3秒
 $times = 3;

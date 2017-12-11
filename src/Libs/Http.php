@@ -1,5 +1,5 @@
 <?php
-namespace AsyncHttp\Libs;
+namespace Xd\AsyncHttp\Libs;
 
 /**
  * Class Http

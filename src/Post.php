@@ -1,22 +1,24 @@
 <?php
-namespace AsyncHttp;
+namespace Xd\AsyncHttp;
+
+use Xd\AsyncHttp\Libs\Http;
 
 /**
  * Class Post
  * @package AsyncHttp
  */
-class Post extends Libs\Http
+class Post extends Http
 {
     protected $requestMethod = 'POST';
 
     /**
      * Post constructor.
      * @param $url
-     * @param $postData 请求的数据
+     * @param $body 请求的数据
      */
-    public function __construct($url, $postData = null)
+    public function __construct($url, $body = null)
     {
         $this->url = $url;
-        $this->requestBody = $postData;
+        $this->requestBody = $body;
     }
 }

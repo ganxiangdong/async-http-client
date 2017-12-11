@@ -27,7 +27,7 @@
 
   "autoload": {
     "psr-4": {
-      "AsyncHttp\\": "src/"
+      "Xd\\AsyncHttp\\": "src/"
     }
   }
 }

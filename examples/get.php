@@ -1,13 +1,15 @@
 <?php
+use Xd\AsyncHttp\AsyncHttp;
+
 include __DIR__.'/../vendor/autoload.php';
 
-$req = new \AsyncHttp\Get("http://192.168.88.2/server.php?sleepTime=3");
+$req = AsyncHttp::get("http://192.168.88.2/server.php?sleepTime=3");
 //        $req->requestHeaders = ["Test:1","Test-X:2"];
 $req->addHeader("Test", 1);
 $req->request();
 
 //请求二，采用第二个参数传query，并设置5s的超时
-$req2 = (new \AsyncHttp\Get("http://192.168.88.2/server.php", ['sleepTime' => 1]))->setTimeout(5)->request();
+$req2 = AsyncHttp::get("http://192.168.88.2/server.php", ['sleepTime' => 1])->setTimeout(5)->request();
 
 //模拟耗时任务3秒
 $times = 3;
