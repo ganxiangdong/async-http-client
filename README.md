@@ -40,7 +40,8 @@ composer require xd/async-http
    $postData = json_encode(['sleepTime' => 1]);
    $req2 = AsyncHttp::post("http://192.168.88.2", $postData)->request();
    //requesting by raw XML
-   $req2 = AsyncHttp::post("http://192.168.88.2", $xmlDataStr)->addHeader("Content-Type":"application/xml")->request();
+   $req2 = AsyncHttp::post("http://192.168.88.2", $xmlDataStr)
+     ->addHeader("Content-Type":"application/xml")->request();
 
    //do somthing...
 
@@ -124,7 +125,7 @@ composer require xd/async-http
 3. How to judge timeout or network unreachable
 
    ```
-   if ($response->getStatusCode() == 0){
+   if ($response->getStatusCode() == 0) {
      
    } 
    ```
